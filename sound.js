@@ -27,15 +27,32 @@ function set_the_loop_mode(mode:number){
 serial.writeBuffer(bufr);
 }
 function set_the_numbers_of_loop_time(times:number){
-    let bufr = pins.createBuffer(5);
+    let bufr = pins.createBuffer(6);
     bufr.setNumber(NumberFormat.UInt8BE, 0, 0xAA);
     bufr.setNumber(NumberFormat.UInt8BE, 1, 0x19);
     bufr.setNumber(NumberFormat.UInt8BE, 2, 0x02);
     bufr.setNumber(NumberFormat.UInt8BE, 3, 0x00);
     bufr.setNumber(NumberFormat.UInt8BE, 4, times);
-    bufr.setNumber(NumberFormat.UInt8BE, 4, times+0xC5);
+    bufr.setNumber(NumberFormat.UInt8BE, 5, times+0xC5);
 serial.writeBuffer(bufr);
 }
+function pause() {
+    let bufr = pins.createBuffer(4);
+    bufr.setNumber(NumberFormat.UInt8BE, 0, 0xAA);
+    bufr.setNumber(NumberFormat.UInt8BE, 1, 0x03);
+    bufr.setNumber(NumberFormat.UInt8BE, 2, 0x00);
+    bufr.setNumber(NumberFormat.UInt8BE, 3, 0xAD);
+    serial.writeBuffer(bufr);
+}
+function stop() {
+    let bufr = pins.createBuffer(4);
+    bufr.setNumber(NumberFormat.UInt8BE, 0, 0xAA);
+    bufr.setNumber(NumberFormat.UInt8BE, 1, 0x04);
+    bufr.setNumber(NumberFormat.UInt8BE, 2, 0x00);
+    bufr.setNumber(NumberFormat.UInt8BE, 3, 0xAE);
+serial.writeBuffer(bufr);
+}
+
 
 let i:number = 0
 serial.redirect(
