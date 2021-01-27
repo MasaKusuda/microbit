@@ -134,6 +134,7 @@ namespace EEPROM{
         return decToBin(value1);
     }
 }
+serial.writeLine("Start program...")
 //13:45の時刻を保存
 //EEPROM.DS1307_REG_RAM1を時間の保存先に
 //EEPROM.DS1307_REG_RAM2を分の保存先に使用
@@ -168,4 +169,5 @@ basic.forever(function () {
     // serial.writeLine("...nextLine")
     // basic.pause(1000);
 })
+serial.writeLine("...End program")
 
